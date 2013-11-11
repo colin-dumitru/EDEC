@@ -451,7 +451,7 @@ Lists all groups which the user joined.
                 },
                 {
                     'rel' : 'leave_group',
-                    'method' : 'GET',
+                    'method' : 'POST',
                     'url' : '/groups/1051/leave.json'
                 }
             ]
@@ -519,7 +519,7 @@ Retrieves information for the group with the given id.
             },
             {
                 'rel' : 'leave_group',
-                'method' : 'GET',
+                'method' : 'POST',
                 'url' : '/groups/1051/leave.json'
             }
         ],
@@ -563,12 +563,12 @@ Retrieves all groups which match the given search term.
                 },
                 {
                     'rel' : 'join_group',
-                    'method' : 'GET',
+                    'method' : 'POST',
                     'url' : '/groups/1051/join.json'
                 },
                 {
                     'rel' : 'leave_group',
-                    'method' : 'GET',
+                    'method' : 'POST',
                     'url' : '/groups/1051/leave.json'
                 }
             ]
@@ -612,7 +612,7 @@ Suggests groups based on the groups the user has already joined.
                 },
                 {
                     'rel' : 'join_group',
-                    'method' : 'GET',
+                    'method' : 'POST',
                     'url' : '/groups/1051/join.json'
                 }
             ]
@@ -655,9 +655,9 @@ Suggests groups based on the groups the user's friends have joined.
                     'url' : '/groups/1051.json'
                 },
                 {
-                    'rel' : 'leave_group',
-                    'method' : 'GET',
-                    'url' : '/groups/1051/leave.json'
+                    'rel' : 'join_group',
+                    'method' : 'POST',
+                    'url' : '/groups/1051/join.json'
                 }
             ]
         }
@@ -700,7 +700,7 @@ Retrieves the groups which are trending in the current and past week.
                 },
                 {
                     'rel' : 'join_group',
-                    'method' : 'GET',
+                    'method' : 'POST',
                     'url' : '/groups/1051/join.json'
                 }
             ]
@@ -740,7 +740,7 @@ Joins the group with the given id.
             },
             {
                 'rel' : 'leave_group',
-                'method' : 'GET',
+                'method' : 'POST',
                 'url' : '/groups/1051/leave.json'
             }
         ]
@@ -779,7 +779,7 @@ Leaves the group with the given id.
             },
             {
                 'rel' : 'join_group',
-                'method' : 'GET',
+                'method' : 'POST',
                 'url' : '/groups/1051.json'
             }
         ]
