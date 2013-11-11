@@ -12,7 +12,7 @@ Retrieves information regarding the currently logged in user, such as name and a
         'avatar' : '<base 64 encoded image>',
         'links' : [
             {
-                'rel' : 'scan_product|personal_groups|recommended_groups',
+                'rel' : 'scan_product|personal_groups|joined_groups',
                 'method' : 'GET|POST|DELETE|CREATE',
                 'url' : '<action url>'
             }
@@ -35,10 +35,10 @@ Retrieves information regarding the currently logged in user, such as name and a
             {
                 'rel' : 'personal_groups',
                 'method' : 'GET',
-                'url' : '/groups/creates.json'
+                'url' : '/groups/created.json'
             },
             {
-                'rel' : 'recommended_groups',
+                'rel' : 'joined_groups',
                 'method' : 'GET',
                 'url' : '/groups/joined.json'
             }
@@ -159,7 +159,7 @@ Retrieves all products which match the given search term.
 
 **Example**
 
-    > GET /products/search/:syrup.json
+    > GET /products/search/syrup.json
     [
         {
             'id' : 5942105002167,
