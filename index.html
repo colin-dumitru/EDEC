@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prototype</title>
+
+    <script type="text/javascript" src="main.js" ></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.js" ></script>
+    <link rel="stylesheet" href="main.css" />
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+</head>
+<body onload="init();">
+    <div id="mainContainer">
+        <div id="pageContainer">
+            <div class="page" style="overflow-x: hidden">
+                <img src="images/can.jpg" />
+
+                <div class="overlay">
+                    <div id='scanner'>
+                        <hr />
+                    </div>
+
+                </div>
+
+                <!--div id="verdict" class="overlay" style="opacity: 0; z-index: -1;"-->
+                <div id="verdict" class="overlay" style="opacity: 0; z-index: -1;">
+                    <img src='images/cola.png' style="margin-left: 130px; margin-top: 10px; background-color: #8bc699;" class="cool" />
+                    <img src='images/accept.png' style="margin-left: 30px; margin-top: 70px;" />
+
+                    <div style="margin-top: 230px; color: white; text-align: center; width: 100%; font-size: 65px;" class="coolText">
+                        Coca Cola Can
+                    </div>
+
+                    <img src='images/cola_company.png' style="margin-left: 80px; margin-top: 300px; width: 300px;" />
+
+                    <div id='viewMore' class="coolText" style="margin-top: 470px; margin-left: 250px; font-size: 25px; padding: 10px; color: whitesmoke; cursor: pointer;">
+                        View More
+                    </div>
+
+                    <div id="scanNew" class="coolText" style="margin-top: 470px; margin-left: 20px; font-size: 25px; padding: 10px; color: whitesmoke; cursor: pointer;">
+                        Scan New
+                    </div>
+
+                    <div id='ingredients' class="ingredients">
+                        <div class="cat_header">Description</div>
+                        <div style="padding: 5px; color: #454545;">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget neque ipsum. Praesent placerat, erat quis dignissim elementum, elit ligula mattis lorem, sit amet eleifend nisi dui nec erat. Nullam quis aliquet mi, in consequat leo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec placerat orci ut luctus elementum. Quisque felis velit, iaculis nec elit id, ullamcorper dapibus dolor.
+                        </div>
+                        <div class="cat_header">Ingredients</div>
+
+                        <div class="ingr">
+                            <span>Ingredient 1</span>
+                            <img src='images/down.png' style="float:right; margin-top: 2px; margin-right: 10px; " />
+                            <div class="ingr_info">
+                                <img src='http://placehold.it/50x50' style="margin-left: 5px; float: left;" />
+                                <div style="color: whitesmoke; margin-top: 20px; float: left; margin-left: 5px;">by</div>
+                                <img src='http://placehold.it/150x50' style="margin-left: 5px; float: left;" />
+                                <div style="color: #444444; margin-top: 10px; float: left; font-size: 25px; margin-left: 5px;">Company Name</div>
+                            </div>
+                        </div>
+
+                        <div class="ingr">
+                            <span>Ingredient 2</span>
+                            <img src='images/down.png' style="float:right; margin-top: 2px; margin-right: 10px; " />
+                            <div class="ingr_info">
+                                <img src='http://placehold.it/50x50' style="margin-left: 5px; float: left;" />
+                                <div style="color: whitesmoke; margin-top: 20px; float: left; margin-left: 5px;">by</div>
+                                <img src='http://placehold.it/150x50' style="margin-left: 5px; float: left;" />
+                                <div style="color: #444444; margin-top: 10px; float: left; font-size: 25px; margin-left: 5px;">Company Name</div>
+                            </div>
+                        </div>
+
+                        <div class="ingr">
+                            <span>Ingredient 3</span>
+                            <img src='images/down.png' style="float:right; margin-top: 2px; margin-right: 10px; " />
+                            <div class="ingr_info">
+                                <img src='http://placehold.it/50x50' style="margin-left: 5px; float: left;" />
+                                <div style="color: whitesmoke; margin-top: 20px; float: left; margin-left: 5px;">by</div>
+                                <img src='http://placehold.it/150x50' style="margin-left: 5px; float: left;" />
+                                <div style="color: #444444; margin-top: 10px; float: left; font-size: 25px; margin-left: 5px;">Company Name</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="page" style="overflow-x: hidden;">
+                <div style="background: #ffffff; height: 50px; position: absolute; width: 100%; z-index: 100">
+                    <input placeholder="Search" style="height: 25px; width: 300px; margin-top: 10px; margin-left: 20px; border: none; border-bottom: 1px solid #181b1c" />
+                    <img src="images/search.png" style="float: right; margin-right: 5px; margin-top: 5px;" />
+                </div>
+
+                <div id='groups' style="height: 550px; padding-top: 50px; overflow-y: auto; position: relative;">
+                    <div class="cat_header cat_dyn">My Groups</div>
+
+                    <div class="group"></div>
+                    <div class="group"></div>
+                    <div class="group"></div>
+                    <div class="group"></div>
+                    <div class="group"></div>
+                    <div class="group_new"></div>
+
+                    <div class="cat_header cat_dyn">Friends</div>
+
+                    <div class="group"></div>
+                    <div class="group"></div>
+                    <div class="group"></div>
+                    <div class="group"></div>
+                    <div class="group"></div>
+
+                    <div class="cat_header cat_dyn">Recommendations</div>
+
+                    <div class="group"></div>
+                    <div class="group"></div>
+                    <div class="group"></div>
+                    <div class="group"></div>
+                    <div class="group"></div>
+
+                    <div class="cat_header cat_dyn">Joined</div>
+
+                    <div class="group"></div>
+                    <div class="group"></div>
+                    <div class="group"></div>
+                    <div class="group"></div>
+                    <div class="group"></div>
+                </div>
+
+                <div id='cat_top1' class="cat_header" style="position: absolute; top: 50px; display: none;">My Groups</div>
+                <div id='cat_top2' class="cat_header" style="position: absolute; top: 80px; display: none;">Friends</div>
+                <div id='cat_top3' class="cat_header" style="position: absolute; top: 110px; display: none;">Recommendations</div>
+                <div id='cat_top4' class="cat_header" style="position: absolute; top: 140px; display: none;">Joined</div>
+
+                <div id='cat_bot1' class="cat_header" style="position: absolute; bottom: 90px;display: none;">My Groups</div>
+                <div id='cat_bot2' class="cat_header" style="position: absolute; bottom: 60px; display: none;">Friends</div>
+                <div id='cat_bot3' class="cat_header" style="position: absolute; bottom: 30px; display: none;">Recommendations</div>
+                <div id='cat_bot4' class="cat_header" style="position: absolute; bottom: 0; display: none;">Joined</div>
+
+                <div id="group_edit" class="overlay" style="z-index: -1; opacity: 0; overflow-y: auto;">
+                    <div id="group_edit_header">
+                        <img id='group_back' src='images/back.png' style="margin-left: 10px; margin-top: 5px; width: 40px; cursor: pointer;"/>
+
+                        <div id='group_save' style="float:right; width: 100px; margin-right: 5px; cursor: pointer;">
+                            <img style="float: right;" src='images/done.png'/>
+                            <div style="width: 50px; margin-top: 8px; font-size: 25px; float: right;">Done</div>
+                        </div>
+
+                    </div>
+
+                    <img src="http://placehold.it/150x150/ffffff" style="margin-left: 5px; margin-top: 5px;" />
+                    <span class="coolText" style="color: white; font-size: 45px; position: absolute; left: 160px; top: 80px;">
+                        Group Name
+                    </span>
+
+                    <div class="coolText" style="background: rgba(67, 128, 120, 1); color: #ffffff; font-size: 20px; width: 220px; height: 27px; padding: 3px; position: absolute; top: 150px; left: 160px; text-align: center;">
+                        Leave
+                    </div>
+
+                    <div style="margin: 5px; padding: 10px; text-align: justify; color: #6a6a6a; ">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget neque ipsum. Praesent placerat, erat quis dignissim elementum, elit ligula mattis lorem, sit amet eleifend nisi dui nec erat. Nullam quis aliquet mi, in consequat leo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec placerat orci ut luctus elementum. Quisque felis velit, iaculis nec elit id, ullamcorper dapibus dolor.
+                    </div>
+
+                    <div style="background: #ffffff; box-shadow: 0 0 10px black; border: 1px solid gray; border-radius: 10px; margin: 5px;">
+                        <div style="background: rgba(67, 128, 120, 1); border-radius: 10px 10px 0 0; color: #ffffff; padding: 5px; font-size: 20px; box-shadow: 0 0px 20px #525252 inset; position: relative;">
+                            Rules
+                            <div id='group_add' style="position: absolute; top: -10px; right: 10px; font-size: 40px; cursor: pointer;">
+                                +
+                            </div>
+                        </div>
+
+                        <div id='group_info_form' class="group_info_form" style="background: #c4c4c4; box-shadow: 0 0 20px gray inset">
+                            <select style="height: 25px; width: 100px; margin-top: 5px; border: none; background: none; font-size: 15px; color: #494949">
+                                <option>Company</option>
+                                <option>Product</option>
+                                <option>Ingredient</option>
+                            </select>
+                            <input style="height: 25px; width: 250px; margin-top: 5px; margin-left: 20px; border: none; border-bottom: 1px solid #181b1c; background: none; font-size: 15px;" placeholder="Name"/>
+
+                            <textarea style="height: 25px; width: 370px; margin-top: 5px; border: none; border-bottom: 1px solid #181b1c; background: none; font-size: 15px;" placeholder="Description"></textarea>
+                        </div>
+                        <ul class="rules">
+                            <li>
+                                Ingredient "Ingredient Name"
+                                <span>&gt</span>
+                            </li>
+                            <li>
+                                Company "Company Name"
+                                <span>&gt</span>
+                            </li>
+                            <li>
+                                Product "Product Name"
+                                <span>&gt</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="page" >
+                <div style="height: 50px; width: 100%; background: #ffffff; font-size: 30px; color: #9b9b9b; text-align: center;">
+                    Worst of the worst
+                </div>
+
+                <div style=" overflow-y: auto; height: 550px;">
+                    <div >
+                        <div class="cat_header">Companies</div>
+
+                        <div style="padding: 5px;">
+                            <img src='http://placehold.it/130x130/ffffff' />
+                            <div style="float: right; font-size: 50px; color: #5a5a5a; margin-top: 25px; margin-right: 20px;" >Company 1</div>
+                        </div>
+
+                        <div>
+                            <div style="float: left; font-size: 30px; color: #5a5a5a; margin-top: 15px; margin-left: 40px;" >2.</div>
+                            <img src='http://placehold.it/75x75/ffffff' style="margin-left: 20px;" />
+                            <div style="float: right; font-size: 30px; color: #5a5a5a; margin-top: 15px; margin-right: 80px;" >Company 2</div>
+                        </div>
+
+                        <div>
+                            <div style="float: left; font-size: 30px; color: #5a5a5a; margin-top: 15px; margin-left: 40px;" >3.</div>
+                            <img src='http://placehold.it/75x75/ffffff' style="margin-left: 20px;" />
+                            <div style="float: right; font-size: 30px; color: #5a5a5a; margin-top: 15px; margin-right: 80px;" >Company 3</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="cat_header">Products</div>
+
+                        <div style="padding: 5px;">
+                            <img src='http://placehold.it/130x130/ffffff' />
+                            <div style="float: right; font-size: 50px; color: #5a5a5a; margin-top: 25px; margin-right: 20px;" >Product 1</div>
+                        </div>
+
+                        <div>
+                            <div style="float: left; font-size: 30px; color: #5a5a5a; margin-top: 15px; margin-left: 40px;" >2.</div>
+                            <img src='http://placehold.it/75x75/ffffff' style="margin-left: 20px;" />
+                            <div style="float: right; font-size: 30px; color: #5a5a5a; margin-top: 15px; margin-right: 80px;" >Product 2</div>
+                        </div>
+
+                        <div>
+                            <div style="float: left; font-size: 30px; color: #5a5a5a; margin-top: 15px; margin-left: 40px;" >3.</div>
+                            <img src='http://placehold.it/75x75/ffffff' style="margin-left: 20px;" />
+                            <div style="float: right; font-size: 30px; color: #5a5a5a; margin-top: 15px; margin-right: 80px;" >Product 3</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="cat_header">Ingredients</div>
+
+                        <div style="padding: 5px;">
+                            <img src='http://placehold.it/130x130/ffffff' />
+                            <div style="float: right; font-size: 50px; color: #5a5a5a; margin-top: 25px; margin-right: 20px;" >Ingredient 1</div>
+                        </div>
+
+                        <div>
+                            <div style="float: left; font-size: 30px; color: #5a5a5a; margin-top: 15px; margin-left: 40px;" >2.</div>
+                            <img src='http://placehold.it/75x75/ffffff' style="margin-left: 20px;" />
+                            <div style="float: right; font-size: 30px; color: #5a5a5a; margin-top: 15px; margin-right: 80px;" >Ingredient 2</div>
+                        </div>
+
+                        <div>
+                            <div style="float: left; font-size: 30px; color: #5a5a5a; margin-top: 15px; margin-left: 40px;" >3.</div>
+                            <img src='http://placehold.it/75x75/ffffff' style="margin-left: 20px;" />
+                            <div style="float: right; font-size: 30px; color: #5a5a5a; margin-top: 15px; margin-right: 80px;" >Ingredient 3</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="cat_header">Trending</div>
+
+                        <div class="group"></div>
+                        <div class="group"></div>
+                        <div class="group"></div>
+                        <div class="group"></div>
+                        <div class="group"></div>
+                        <div class="group"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
