@@ -63,7 +63,7 @@ Retrieves information for a particular product which has the given bar-code id. 
         'image' : '<base 64 encoded image>',
         'ingredients' : [
             {
-                'id' : <ingredient uri>,
+                'id' : '<ingredient uri>',
                 'links' : [
                     'rel' : 'ingredient_info',
                     'method' : 'GET|POST|PUT|DELETE',
@@ -73,7 +73,7 @@ Retrieves information for a particular product which has the given bar-code id. 
             ...
         ],
         'company' : {
-            'id' : <company uri>,
+            'id' : '<company uri>',
             'links': [
                 {
                     'rel' : 'company_info',
@@ -92,7 +92,7 @@ Retrieves information for a particular product which has the given bar-code id. 
         'image' : 'iVBORw0KGgoAAA==',
         'ingredients' : [
             {
-                'id' : /ingredients/2487,
+                'id' : '/ingredients/2487',
                 'links' : [
                     'rel' : 'ingredient_info',
                     'method' : 'GET',
@@ -101,7 +101,7 @@ Retrieves information for a particular product which has the given bar-code id. 
             }
         ],
         'company' : {
-            'id' : /companies/547,
+            'id' : '/companies/547',
             'links': [
                 {
                     'rel' : 'company_info',
@@ -182,7 +182,7 @@ Creates a new product with the given information.
         'name': '<product name>',
         'image' : '<base 64 encoded image>',
         'ingredients' : [
-            <ingredient uri>,
+            '<ingredient uri>',
             ...
         ],
         'company' : <company id>
@@ -207,7 +207,7 @@ Creates a new product with the given information.
         'name': 'Karo corn syrup',
         'image' : 'iVBORw0KGgoAAA==',
         'ingredients' : [
-            2487
+            '/ingredients/2487'
         ],
         'company' : '/companies/547'
     }
@@ -232,7 +232,7 @@ Retrieves all similar products with the product given by the bar code id.
 
     [
         {
-            'id' : '<bar code uri>',
+            'id' : '<product uri>',
             'links' : [
                 'rel' : 'product_info',
                 'method' : 'GET|POST|PUT|DELETE',
@@ -264,7 +264,7 @@ Retrieves information about the ingredient with the given id.
 
     {
         'name': '<ingredient name>',
-        'company' : <company uri>
+        'company' : '<company uri>'
     }
 
 **Example**
@@ -475,7 +475,7 @@ Retrieves information for the group with the given id.
         'rules' : [
         `   {
                 'item_id' : '<item uri>',
-                'reason' : '<reason filtered>'
+                'filter_reason_id' : '<filter reason uri>'
             }
             ...
         ],
@@ -501,11 +501,11 @@ Retrieves information for the group with the given id.
         'rules' : [
         `   {
                 'item_id' : '/companies/312',
-                'reason' : 'Uses unsafe pesticides'
+                'filter_reason_id' : '/filter_reasons/651'
             },
         `   {
                 'item_id' : '/ingredients/2487',
-                'reason' : 'Made by Monsanto'
+                'filter_reason_id' : '/filter_reasons/77897'
             }
         ],
         'links' : [
@@ -795,7 +795,7 @@ Creates a new group using the information sent to the server.
         'rules' : [
         `   {
                 'item_id' : '<item uri (company, ingredient, product)>',
-                'reason' : '<why the item is filtered>'
+                'filter_reason_id' : '<filte reason uri>'
             }
             ...
         ]
@@ -825,11 +825,11 @@ Creates a new group using the information sent to the server.
         'rules' : [
         `   {
                 'item_id' : '/companies/312',
-                'reason' : 'Uses unsafe pesticides'
+                'filter_reason_id' : '/filter_reason_id/651'
             },
         `   {
                 'item_id' : '/ingredients/2487',
-                'reason' : 'Made by Monsanto'
+                'filter_reason_id' : '/filter_reason_id/8488'
             }
         ]
     }
@@ -865,6 +865,7 @@ Deletes the group owned by the user and with the given id. If the HTTP status co
 **Example**
 
     > `DELETE /groups/1051.json`
+
 
 ### Update Group ###
 
@@ -932,6 +933,95 @@ Updates the group with the information sent to the server.
                 'url' : '/groups/1051.json'
             }
         ]
+    }
+    
+### Filter Reasons ###
+
+Retrieves a list of available filter reasons. For performance reasons, the filter description is also included inside the response.
+
+**Request**:  `GET /filter_reasons`
+
+**Response**
+
+    {
+        [
+            'id' : '<reason uri>',
+            'for_resource' : '<resource type (company, ingredient, product)>',
+            'short_description' : '<reason description>',
+            'links' : [
+                {
+                    'rel' : 'reason_info',
+                    'method' : 'GET',
+                    'url' : '<action url>'
+                }
+            ]
+        ]
+        ...
+    }
+
+**Example**
+
+    > GET /filter_reasons
+    {
+        [
+            'id' : '/filter_reasons/6874',
+            'for_resource' : '/companies',
+            'short_description' : 'Animal Abuse',
+            'links' : [
+                {
+                    'rel' : 'reason_info',
+                    'method' : 'GET',
+                    'url' : '/filter_reasons/6874.json'
+                }
+            ]
+        ],
+        [
+            'id' : '/filter_reasons/787',
+            'for_resource' : '/ingredients',
+            'short_description' : 'Can cause cancer',
+            'links' : [
+                {
+                    'rel' : 'reason_info',
+                    'method' : 'GET',
+                    'url' : '/filter_reasons/787.json'
+                }
+            ]
+        ],
+        [
+            'id' : '/filter_reasons/9888',
+            'for_resource' : '/products',
+            'short_description' : 'Unsafe work prctices',
+            'links' : [
+                {
+                    'rel' : 'reason_info',
+                    'method' : 'GET',
+                    'url' : '/filter_reasons/9888.json'
+                }
+            ]
+        ]
+    }
+    
+### Filter Reason Information ###
+
+Retrieves information for a single filter reason
+
+**Request**:  `GET /filter_reasons/:id`
+
+**Response**
+
+    {
+        'id' : '<reason uri>',
+        'for_resource' : '<resource type (company, ingredient, product)>',
+        'short_description' : '<reason description>'
+    }
+
+**Example**
+
+    > GET /filter_reasons/6874
+    {
+        'id' : '/filter_reasons/6874',
+        'for_resource' : '/companies',
+        'short_description' : 'Animal Abuse'
     }
 
 
