@@ -11,7 +11,15 @@ EDEC::Application.routes.draw do
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
+  get 'groups/created' => 'groups#created'
+  get 'groups/joined' => 'groups#joined'
+  get 'groups/:name/search' => 'groups#search'
+  get 'groups/:id/join' => 'groups#join'
+  get 'groups/:id/leave' => 'groups#leave'
+
   resources :products
+  resources :filter_reasons
+  resources :groups
 
   # Example resource route with options:
   #   resources :products do
