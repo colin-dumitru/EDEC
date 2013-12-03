@@ -1,2 +1,2 @@
-class FilterReasons < ActiveRecord::Base
+class FilterReason < ActiveRecord::Base
 end

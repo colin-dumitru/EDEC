@@ -2,7 +2,7 @@ class FilterReasonsController < ApplicationController
   include ApplicationHelper
 
   def index
-    @reasons = FilterReasons.all
+    @reasons = FilterReason.all
 
     respond_to do |format|
       format.json do
@@ -21,7 +21,7 @@ class FilterReasonsController < ApplicationController
   end
 
   def show
-    @reason = FilterReasons.find(params[:id])
+    @reason = FilterReason.find(params[:id])
 
     respond_to do |format|
       format.json do
