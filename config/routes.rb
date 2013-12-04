@@ -17,6 +17,10 @@ EDEC::Application.routes.draw do
   get 'groups/:id/join' => 'groups#join'
   get 'groups/:id/leave' => 'groups#leave'
 
+  get '/stats/top/ingredients' => 'stats#ingredients'
+  get '/stats/top/products' => 'stats#products'
+  get '/stats/top/companies' => 'stats#companies'
+
   resources :products
   resources :filter_reasons
   resources :groups
