@@ -175,7 +175,7 @@ Retrieves all products which match the given search term.
 
 Creates a new product with the given information.
 
-**Request**:  `PUT /products.json`
+**Request**:  `POST /products.json`
 
     {
         'id' : '<barcode id>',
@@ -201,7 +201,7 @@ Creates a new product with the given information.
 
 **Example**
 
-    > PUT /products.json
+    > POST /products.json
     {
         'id' : 5942105002167,
         'name': 'Karo corn syrup',
@@ -786,7 +786,7 @@ Leaves the group with the given id.
 
 Creates a new group using the information sent to the server.
 
-**Request**:  `PUT /groups.json`
+**Request**:  `POST /groups.json`
 
     {
         'title' : '<group title>',
@@ -817,7 +817,7 @@ Creates a new group using the information sent to the server.
 
 **Example**
 
-    > PUT /groups.json
+    > POST /groups.json
     {
         'title' : 'Anti Monsanto Group',
         'logo' : 'iVBORw0KGgoAAA==',
@@ -871,7 +871,7 @@ Deletes the group owned by the user and with the given id. If the HTTP status co
 
 Updates the group with the information sent to the server.
 
-**Request**:  `POST /groups/:id.json`
+**Request**:  `PUT /groups/:id.json`
 
     {
         'title' : '<group title>',
@@ -902,7 +902,7 @@ Updates the group with the information sent to the server.
 
 **Example**
 
-    > POST /groups/1051.json
+    > PUT /groups/1051.json
     {
         'title' : 'Anti Monsanto Group',
         'logo' : 'iVBORw0KGgoAAA==',
