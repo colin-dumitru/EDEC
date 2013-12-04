@@ -939,7 +939,7 @@ Updates the group with the information sent to the server.
 
 Retrieves a list of available filter reasons. For performance reasons, the filter description is also included inside the response.
 
-**Request**:  `GET /filter_reasons`
+**Request**:  `GET /filter_reasons.json`
 
 **Response**
 
@@ -961,7 +961,7 @@ Retrieves a list of available filter reasons. For performance reasons, the filte
 
 **Example**
 
-    > GET /filter_reasons
+    > GET /filter_reasons.json
     {
         [
             'id' : '/filter_reasons/6874',
@@ -1005,7 +1005,7 @@ Retrieves a list of available filter reasons. For performance reasons, the filte
 
 Retrieves information for a single filter reason
 
-**Request**:  `GET /filter_reasons/:id`
+**Request**:  `GET /filter_reasons/:id.json`
 
 **Response**
 
@@ -1017,7 +1017,7 @@ Retrieves information for a single filter reason
 
 **Example**
 
-    > GET /filter_reasons/6874
+    > GET /filter_reasons/6874.json
     {
         'id' : '/filter_reasons/6874',
         'for_resource' : '/companies',
