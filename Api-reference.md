@@ -142,7 +142,7 @@ Gives the verdict on a product, if the the user should buy it or not. If the `st
 
 Retrieves all products which match the given search term.
 
-**Request**:  `GET /products/search/:name.json`
+**Request**:  `GET /products/:name/name.json`
 
 **Response**
 
@@ -159,7 +159,7 @@ Retrieves all products which match the given search term.
 
 **Example**
 
-    > GET /products/search/syrup.json
+    > GET /products/syrup/name.json
     [
         {
             'id' : '/products/5942105002167',
@@ -279,7 +279,7 @@ Retrieves information about the ingredient with the given id.
 
 Retrieves all ingredients which match the given search term.
 
-**Request**:  `GET /ingredients/search/:name.json`
+**Request**:  `GET /ingredients/:name/search.json`
 
 **Response**
 
@@ -297,7 +297,7 @@ Retrieves all ingredients which match the given search term.
 
 **Example**
 
-    > GET /ingredients/search/corn.json
+    > GET /ingredients/corn/search.json
     [
         {
             'id' : '/ingredients/2487',
@@ -336,7 +336,7 @@ Retrieves information on the company with the given id.
 
 Retrieves all companies which match the given search term.
 
-**Request**:  `GET /companies/search/:name.json`
+**Request**:  `GET /companies/:name/search.json`
 
 **Response**
 
