@@ -21,7 +21,10 @@ EDEC::Application.routes.draw do
   get '/stats/top/products' => 'stats#products'
   get '/stats/top/companies' => 'stats#companies'
 
+  get 'ingredients/:name/search' => 'ingredients#search'
+
   resources :products
+  resources :ingredients
   resources :filter_reasons
   resources :groups
 
