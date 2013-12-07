@@ -50,7 +50,7 @@ Retrieves information regarding the currently logged in user, such as name and a
 
 This sections contains information regarding all the knowledge DB available to the end user, including products, ingredients, companies and methods of finding this information.
 
-### Product ###
+### ![][1] Product ###
 
 **Request**:  `GET /products/:barCodeId.json`
 
@@ -138,7 +138,7 @@ Gives the verdict on a product, if the the user should buy it or not. If the `st
         ]
     }
 
-### Product Search ###
+### ![][1] Product Search ###
 
 Retrieves all products which match the given search term.
 
@@ -222,7 +222,7 @@ Creates a new product with the given information.
     }
     
 
-### Similar Products ###
+### ![][1] Similar Products ###
 
 Retrieves all similar products with the product given by the bar code id.
 
@@ -254,7 +254,7 @@ Retrieves all similar products with the product given by the bar code id.
             ]
     ]
 
-### Ingredient ###
+### ![][1] Ingredient ###
 
 **Request**:  `GET /ingredients/:id.json`
 
@@ -275,7 +275,7 @@ Retrieves information about the ingredient with the given id.
         'company' : '/companies/312'
     }
 
-### Ingredient Search ###
+### ![][1] Ingredient Search ###
 
 Retrieves all ingredients which match the given search term.
 
@@ -309,7 +309,7 @@ Retrieves all ingredients which match the given search term.
         }
     ]
 
-### Company ###
+### ![][1] Company ###
 
 Retrieves information on the company with the given id.
 
@@ -332,7 +332,7 @@ Retrieves information on the company with the given id.
         'logo' : 'iVBORw0KGgoAAA=='
     }
 
-### Company Search ###
+### ![][1] Company Search ###
 
 Retrieves all companies which match the given search term.
 
@@ -370,7 +370,7 @@ Retrieves all companies which match the given search term.
 
 This sections contains actions related to group management and discovery.
 
-### Created Group Listings ###
+### ![][1] Created Group Listings ###
 
 Lists all groups which the user created.
 
@@ -414,7 +414,7 @@ Lists all groups which the user created.
         }
     ]
 
-### Joined Group Listings ###
+### ![][1] Joined Group Listings ###
 
 Lists all groups which the user joined.
 
@@ -459,7 +459,7 @@ Lists all groups which the user joined.
         ...
     ]
 
-### Group Information ###
+### ![][1] Group Information ###
 
 Retrieves information for the group with the given id.
 
@@ -523,11 +523,11 @@ Retrieves information for the group with the given id.
         'has_users' : true
     }
 
-### Group Search ###
+### ![][1] Group Search ###
 
 Retrieves all groups which match the given search term.
 
-**Request**:  `GET /groups/search/:name.json`
+**Request**:  `GET /groups/:name/search.json`
 
 **Response**
 
@@ -548,7 +548,7 @@ Retrieves all groups which match the given search term.
 
 **Example**
 
-    > GET /groups/search/Monsanto.json
+    > GET /groups/Monsanto/search.json
     [
         {
             'id' : '/groups/1051',
@@ -704,7 +704,7 @@ Retrieves the groups which are trending in the current and past week.
         }
     ]
 
-### Join Group ###
+### ![][1] Join Group ###
 
 Joins the group with the given id.
 
@@ -743,7 +743,7 @@ Joins the group with the given id.
         ]
     }
 
-### Leave Group ###
+### ![][1] Leave Group ###
 
 Leaves the group with the given id.
 
@@ -782,7 +782,7 @@ Leaves the group with the given id.
         ]
     }
 
-### Create Group ###
+### ![][1] Create Group ###
 
 Creates a new group using the information sent to the server.
 
@@ -850,7 +850,7 @@ Creates a new group using the information sent to the server.
         ]
     }
 
-### Delete Group ###
+### ![][1] Delete Group ###
 
 Deletes the group owned by the user and with the given id. If the HTTP status code is anything other than 200, then the returned `message` field contains the reason why the deletion failed.
 
@@ -859,7 +859,7 @@ Deletes the group owned by the user and with the given id. If the HTTP status co
 **Response**
 
     {
-        'message' : '<fail message>'
+        'mecssage' : '<fail message>'
     }
 
 **Example**
@@ -867,7 +867,7 @@ Deletes the group owned by the user and with the given id. If the HTTP status co
     > `DELETE /groups/1051.json`
 
 
-### Update Group ###
+### ![][1] Update Group ###
 
 Updates the group with the information sent to the server.
 
@@ -935,7 +935,7 @@ Updates the group with the information sent to the server.
         ]
     }
     
-### Filter Reasons ###
+### ![][1] Filter Reasons ###
 
 Retrieves a list of available filter reasons. For performance reasons, the filter description is also included inside the response.
 
@@ -1001,7 +1001,7 @@ Retrieves a list of available filter reasons. For performance reasons, the filte
         ]
     }
     
-### Filter Reason Information ###
+### ![][1] Filter Reason Information ###
 
 Retrieves information for a single filter reason
 
@@ -1029,7 +1029,7 @@ Retrieves information for a single filter reason
 
 This section contains information for actions which retrieve various statistics regarding the resources managed by the server, including the most blacklisted companies, ingredients and products.
 
-### Top 3 Ingredients ###
+### ![][1] Top 3 Ingredients ###
 
 Retrieves the top 3 most blacklisted ingredients.
 
@@ -1079,7 +1079,7 @@ Retrieves the top 3 most blacklisted ingredients.
         }
     ]
 
-### Top 3 Products ###
+### ![][1] Top 3 Products ###
 
 Retrieves the top 3 most blacklisted products.
 
@@ -1129,7 +1129,7 @@ Retrieves the top 3 most blacklisted products.
         }
     ]
 
-### Top 3 Companies ###
+### ![][1] Top 3 Companies ###
 
 Retrieves the top 3 most blacklisted companies.
 
@@ -1181,3 +1181,6 @@ Retrieves the top 3 most blacklisted companies.
 
 
 > Written with [StackEdit](https://stackedit.io/).
+
+
+  [1]: http://img1.moneycontrol.com/images/easymf/new/tick_mark.gif
