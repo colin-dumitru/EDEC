@@ -123,7 +123,7 @@ Gives the verdict on a product, if the the user should buy it or not. If the `st
     {
         'status' : 'green|red',
         'reasons' : [
-            '<reason why it was filtered>`,
+            '<filter reason uri>`,
             ...
         ]
     }
@@ -134,7 +134,7 @@ Gives the verdict on a product, if the the user should buy it or not. If the `st
     {
         'status' : 'red',
         'reasons' : [
-            'Ingredient "Corn" is made by company "Monsato"`
+            '/filter_reasons/1`
         ]
     }
 
