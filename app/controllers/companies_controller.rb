@@ -1,36 +1,35 @@
 require 'dydra_impl'
 require 'json'
 
-class IngredientsController < ApplicationController
+class CompaniesController < ApplicationController
   include DydraHelper
   include ApplicationHelper
 
   def show
-    bindings = $d.resource(params[:id], 'ingredient')
-    company = rid( bind_value(bindings, 'madeBy'), 'company')
+    bindings = $d.resource(params[:id], 'company')
 
     respond_to do |format|
       format.json do
          render json: {
              :name => bind_value(bindings, 'name'),
-             :company => "/companies/#{company}"
+             :description => bind_value(bindings, 'description'),
+             :logo => bind_value(bindings, 'logo')
          }
       end
     end
   end
 
   def search
-    bindings = $d.search_by_name(params[:name], 'ingredient')
+    bindings = $d.search_by_name(params[:name], 'company')
 
     respond_to do |format|
       format.json do
         render json: bindings.map {|binding|
-          id = rid(binding['s']['value'], 'ingredient')
-
+          id = rid(binding['s']['value'], 'company')
           {
-              :id => "/ingredients/#{id}",
+              :id => "/companies/#{id}",
               :links => [
-                  link('ingredient_info', 'GET', "/ingredients/#{id}.json")
+                  link('company_info', 'GET', "/companies/#{id}.json")
               ]
           }
         }

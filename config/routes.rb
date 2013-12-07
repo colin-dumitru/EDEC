@@ -17,14 +17,20 @@ EDEC::Application.routes.draw do
   get 'groups/:id/join' => 'groups#join'
   get 'groups/:id/leave' => 'groups#leave'
 
+  get 'products/:id/similar' => 'products#similar'
+  get 'products/:id/verdict' => 'products#verdict'
+
   get '/stats/top/ingredients' => 'stats#ingredients'
   get '/stats/top/products' => 'stats#products'
   get '/stats/top/companies' => 'stats#companies'
 
+  get 'products/:name/search' => 'products#search'
   get 'ingredients/:name/search' => 'ingredients#search'
+  get 'companies/:name/search' => 'companies#search'
 
   resources :products
   resources :ingredients
+  resources :companies
   resources :filter_reasons
   resources :groups
 

@@ -1,33 +1,38 @@
+require 'dydra_impl'
+
 class ProductsController < ApplicationController
   include ApplicationHelper
+  include DydraHelper
 
-  #before_action :set_product, only: [:show, :edit, :update, :destroy]
-
-  # GET /products.json
-  def index
-
-  end
-
-  # GET /products/1.json
   def show
+    bindings = $d.resource(params[:id], 'ingredient')
+    company_id = rid(bind_value(bindings, 'madeBy'), 'company')
+
+    ingredients_query = "PREFIX p:<http://edec.org/product/>
+                      SELECT *
+                      WHERE {
+                               p:#{params[:id]} <http://edec.org/hasIngredient> ?o
+                      }"
+    ingredients_bindings = $d.query(ingredients_query)
 
     respond_to do |format|
       format.json do
         render json: {
-            :name => 'Product Name',
-            :image => 'R0lGODdhCgAKAOMAAMzMzJaWlqqqqre3t6Ojo7GxscXFxb6+vpycnAAAAAAAAAAAAAAAAAAAAAAAAAAAACwAAAAACgAKAAAEGxDISau9mIpRC5FfIRRgaQTTNwKjABzIkc1ABAA7',
-            :ingredients => [
-                {
-                    :id => '/ingredients/1',
-                    :links => [
-                        link('ingredient_info', 'GET', '/ingredients/1.json')
-                    ]
-                }
-            ],
+            :name => bind_value(bindings, 'name'),
+            :image => 'Irina forgot to add an image',
+            :ingredients => ingredients_bindings.map { |binding|
+              id = rid(binding['o']['value'], 'ingredient')
+              {
+                  :id => "/ingredients/#{id}",
+                  :links => [
+                      link('ingredient_info', 'GET', "/ingredients/#{id}.json")
+                  ]
+              }
+            },
             :company => {
-                :id => '/companies/1',
+                :id => "/companies/#{company_id}",
                 :links => [
-                    link('company_info', 'GET', '/companies/1.json')
+                    link('company_info', 'GET', "/companies/#{company_id}.json")
                 ]
             }
         }
@@ -35,63 +40,58 @@ class ProductsController < ApplicationController
     end
   end
 
-  # GET /products/new
-  def new
-    @product = Product.new
-  end
-
-  # GET /products/1/edit
-  def edit
-  end
-
-  # POST /products
-  # POST /products.json
-  def create
-    @product = Product.new(product_params)
-
+  def search
     respond_to do |format|
-      if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @product }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
+      format.json do
+        bindings = $d.search_by_name(params[:name], 'product')
+
+        render json: bindings.map { |binding|
+          id = rid(binding['s']['value'], 'product')
+
+          {
+              :id => "/products/#{id}",
+              :links => [
+                  link('product_info', 'GET', "/products/#{id}.json")
+              ]
+          }
+        }
       end
     end
   end
 
-  # PATCH/PUT /products/1
-  # PATCH/PUT /products/1.json
-  def update
+  def similar
+    query = "PREFIX v:<http://edec.org/product/>
+
+            SELECT DISTINCT ?product
+            WHERE {
+                     v:#{params[:id]} <http://edec.org/type> ?type;
+                           <http://edec.org/hasIngredient> ?ing.
+                     ?product  <http://edec.org/type> ?type;
+                                     <http://edec.org/hasIngredient> ?ingr.
+                      FILTER ( ?product != v:1 &&   (?ingr IN (?ing) )  )
+            }
+             HAVING ( ( count(?ing)>=3 && count(?ingr)>=2 ) || (count(?ing)<3 ) )"
+
+    bindings = $d.query(query)
+
     respond_to do |format|
-      if @product.update(product_params)
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
+      format.json do
+        render json: bindings.map { |binding|
+          id = rid(binding['product']['value'], 'product')
+
+          {
+              :id => id,
+              :links => [
+                  link('product_info', 'GET', "/products/#{id}.json")
+              ]
+          }
+        }
       end
     end
   end
 
-  # DELETE /products/1
-  # DELETE /products/1.json
-  def destroy
-    @product.destroy
-    respond_to do |format|
-      format.html { redirect_to products_url }
-      format.json { head :no_content }
-    end
+  def verdict
+
   end
 
-  private
-  # Use callbacks to share common setup or constraints between actions.
-  def set_product
-    @product = Product.find(params[:id])
-  end
-
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def product_params
-    params[:product]
-  end
 end

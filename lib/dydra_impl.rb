@@ -17,13 +17,18 @@ class DydraImpl
     JSON.parse(result)['results']['bindings']
   end
 
-  def search(name, type)
+  def search_by_name(name, type)
     result = @repository.query("PREFIX i:<http://edec.org/#{type}/>
           SELECT *
           WHERE {
                    ?s <http://edec.org/name> ?o FILTER (regex(str(?s), 'edec.org/#{type}') && regex(str(?o), '#{name}', 'i'))
           }"
     )
+    JSON.parse(result)['results']['bindings']
+  end
+
+  def query(query)
+    result = @repository.query(query)
     JSON.parse(result)['results']['bindings']
   end
 end
