@@ -1,10 +1,10 @@
 class GroupsController < ApplicationController
   include ApplicationHelper
 
-  before_action :check_authenticated, :only => [:created, :joined, :join, :leave, :create, :update]
+  before_action :check_authenticated, :only => [:created, :joined, :join, :leave, :create, :update, :personal_suggestions]
 
   def created
-    @groups = Group.all
+    @groups = Group.all.where(owner: @user.id)
 
     respond_to do |format|
       format.json do
@@ -188,5 +188,70 @@ class GroupsController < ApplicationController
         }
       end
     end
+  end
+
+  def trending
+    @group_ids = Member.
+        where('created_at > ?', 1.week.ago).
+        group('group_id').
+        count('id')
+
+    @group_ids = @group_ids.to_a.
+        sort_by { |_, value| value }.
+        reverse![0..5].
+        map { |pair| pair[0] }
+
+    respond_to do |format|
+      format.json do
+        render json: @group_ids.map { |id|
+          {
+              :id => "/groups/#{id}",
+              :links => [
+                  link('group_info', 'GET', "/groups/#{id}.json"),
+                  link('join_info', 'GET', "/groups/#{id}/join.json")
+              ]
+          }
+        }
+      end
+    end
+  end
+
+  def personal_suggestions
+    # Get all groups which were created by the user or which were joined by the user
+    @group_ids = (Group.all.where(owner: @user.id) + Member.where(:user_id => @user.id).map { |member| member.group }).
+        map { |group| group.id }.
+        uniq { |id| id }
+
+    # Get all item ids for the above groups
+    @item_ids = Rule.where('group_id in (?)', @group_ids).
+        map { |rule| rule.item_id }.
+        uniq { |id| id }
+
+    # Get groups which also have these item ids excluding the ones above
+    @suggested = Rule.where('item_id in (?) and group_id not in (?)', @item_ids, @group_ids).
+        group(:group_id).
+        count(:id).
+        to_a.
+        sort_by {|_, v| v}.
+        map { |k, _| k}.
+        reverse![0..5]
+
+    respond_to do |format|
+      format.json do
+        render json: @suggested.map{|id|
+          {
+              :id => "/groups/#{id}",
+              :links => [
+                  link('group_info', 'GET', "/groups/#{id}.json"),
+                  link('join_info', 'GET', "/groups/#{id}/join.json")
+              ]
+          }
+        }
+      end
+    end
+  end
+
+  def friends_suggestion
+
   end
 end

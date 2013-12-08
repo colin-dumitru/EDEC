@@ -16,6 +16,8 @@ EDEC::Application.routes.draw do
   get 'groups/:name/search' => 'groups#search'
   get 'groups/:id/join' => 'groups#join'
   get 'groups/:id/leave' => 'groups#leave'
+  get 'groups/trending' => 'groups#trending'
+  get 'groups/suggest/personal' => 'groups#personal_suggestions'
 
   get 'products/:id/similar' => 'products#similar'
   get 'products/:id/verdict' => 'products#verdict'
