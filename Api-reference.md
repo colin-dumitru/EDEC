@@ -660,7 +660,7 @@ Suggests groups based on the groups the user's friends have joined.
         }
     ]
 
-### Trending Group ###
+### ![][1] Trending Group ###
 
 Retrieves the groups which are trending in the current and past week.
 
