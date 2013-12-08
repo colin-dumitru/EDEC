@@ -572,7 +572,7 @@ Retrieves all groups which match the given search term.
         }
     ]
 
-### Group Suggestions - Personal ###
+### ![][1] Group Suggestions - Personal ###
 
 Suggests groups based on the groups the user has already joined.
 
