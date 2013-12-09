@@ -112,7 +112,7 @@ Retrieves information for a particular product which has the given bar-code id. 
         }
     }
     
-### Product Verdict ###
+### ![][1] Product Verdict ###
 
 **Request**:  `GET /products/:barCodeId/verdict.json`
 
