@@ -4,24 +4,17 @@ class ProductsController < ApplicationController
   include ApplicationHelper
   include DydraHelper
 
-  def show
-    bindings = $d.resource(params[:id], 'ingredient')
-    company_id = rid(bind_value(bindings, 'madeBy'), 'company')
+  before_action :check_authenticated, :only => [:verdict]
 
-    ingredients_query = "PREFIX p:<http://edec.org/product/>
-                      SELECT *
-                      WHERE {
-                               p:#{params[:id]} <http://edec.org/hasIngredient> ?o
-                      }"
-    ingredients_bindings = $d.query(ingredients_query)
+  def show
+    product = Product.find(params[:id])
 
     respond_to do |format|
       format.json do
         render json: {
-            :name => bind_value(bindings, 'name'),
+            :name => product.name,
             :image => 'Irina forgot to add an image',
-            :ingredients => ingredients_bindings.map { |binding|
-              id = rid(binding['o']['value'], 'ingredient')
+            :ingredients => product.ingredients.map { |id|
               {
                   :id => "/ingredients/#{id}",
                   :links => [
@@ -30,9 +23,9 @@ class ProductsController < ApplicationController
               }
             },
             :company => {
-                :id => "/companies/#{company_id}",
+                :id => "/companies/#{product.company_id}",
                 :links => [
-                    link('company_info', 'GET', "/companies/#{company_id}.json")
+                    link('company_info', 'GET', "/companies/#{product.company_id}.json")
                 ]
             }
         }
@@ -91,6 +84,47 @@ class ProductsController < ApplicationController
   end
 
   def verdict
+    product = Product.find(params[:id])
+
+    # company which made the product
+    companies = [product.company_id]
+    # product ingredients
+    ingredients = product.ingredients
+    # add companies which made the ingredients
+    ingr_query = "PREFIX i:<http://edec.org/ingredient/>
+                  SELECT DISTINCT *
+                  WHERE {
+                    ?s <http://edec.org/madeBy> ?o FILTER (?s in (#{ingredients.map { |i| "i:#{i}" }.join(',')}))
+                  }"
+
+    companies = (companies + $d.query(ingr_query).map { |binding|
+      rid(binding['o']['value'], 'company')
+    }).uniq { |id| id }
+
+    # Get all the blacklisted items for the user (groups which he has joined or created)
+    rules = (Group.all.where(owner: @user.id) + Member.where(:user_id => @user.id).map { |member| member.group }).
+        map { |group| group.rules }.
+        flatten.
+        map { |rule| {item: rule.item_id, filter: rule.filter_reason_id} }
+
+    # Create a list with all possible blacklist items
+    black_items = %W(/products/#{product.id}) +
+        ingredients.map { |id| "/ingredients/#{id}" } +
+        companies.map { |id| "/companies/#{id}" }
+
+    # Select only rules which have a blacklist item from the above list
+    reasons = rules.select{|rule|
+      black_items.include? rule[:item]
+    }.map {|rule| rule[:filter]}.uniq{|id| id}
+
+    respond_to do |format|
+      format.json do
+        render json: {
+            :status => reasons.empty? ? 'green' : 'red',
+            :reasons => reasons.map{|id| "/filter_reasons/#{id}"}
+        }
+      end
+    end
 
   end
 
