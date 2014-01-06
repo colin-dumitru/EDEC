@@ -1,8 +1,4 @@
 class ApplicationController < ActionController::Base
-  # TODO remove
-  # protect_from_forgery with: :exception
-
-
   def check_authenticated
     unless @user
       @user = User.new

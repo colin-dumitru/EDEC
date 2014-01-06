@@ -10,7 +10,7 @@ class GroupsController < ApplicationController
       format.json do
         render json: @groups.map { |group|
           {
-              :id => "/groups/#{group.id}.json",
+              :id => "/groups/#{group.id}",
               :link => [
                   link('GET', 'group_info', "/groups/#{group.id}.json"),
                   link('DELETE', 'delete_info', "/groups/#{group.id}.json")
@@ -30,7 +30,7 @@ class GroupsController < ApplicationController
       format.json do
         render json: @groups.map { |group|
           {
-              :id => "/groups/#{group.id}.json",
+              :id => "/groups/#{group.id}",
               :link => [
                   link('group_info', 'GET', "/groups/#{group.id}.json"),
                   link('delete_info', 'DELETE', "/groups/#{group.id}.json")
@@ -48,7 +48,7 @@ class GroupsController < ApplicationController
     respond_to do |format|
       format.json do
         render json: {
-            :id => "/groups/#{@group.id}.json",
+            :id => "/groups/#{@group.id}",
             :title => @group.title,
             :logo => @group.logo,
             :description => @group.description,
@@ -76,7 +76,7 @@ class GroupsController < ApplicationController
       format.json do
         render json: @groups.map { |group|
           {
-              :id => "/groups/#{group.id}.json",
+              :id => "/groups/#{group.id}",
               :link => [
                   link('group_info', 'GET', "/groups/#{group.id}.json"),
                   link('delete_info', 'DELETE', "/groups/#{group.id}.json")
@@ -137,7 +137,7 @@ class GroupsController < ApplicationController
     respond_to do |format|
       format.json do
         render json: {
-            :id => "/groups/#{@group.id}.json",
+            :id => "/groups/#{@group.id}",
             :links => [
                 link('group_info', 'GET', "/groups/#{@group.id}.json"),
                 link('delete_group', 'DELETE', "/groups/#{@group.id}.json")
@@ -180,7 +180,7 @@ class GroupsController < ApplicationController
     respond_to do |format|
       format.json do
         render json: {
-            :id => "/groups/#{@group.id}.json",
+            :id => "/groups/#{@group.id}",
             :links => [
                 link('group_info', 'GET', "/groups/#{@group.id}.json"),
                 link('delete_group', 'DELETE', "/groups/#{@group.id}.json")
