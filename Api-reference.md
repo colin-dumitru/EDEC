@@ -825,11 +825,11 @@ Creates a new group using the information sent to the server.
         'rules' : [
         `   {
                 'item_id' : '/companies/312',
-                'filter_reason_id' : '/filter_reason_id/651'
+                'filter_reason_id' : '/filter_reasons/651'
             },
         `   {
                 'item_id' : '/ingredients/2487',
-                'filter_reason_id' : '/filter_reason_id/8488'
+                'filter_reason_id' : '/filter_reasons/8488'
             }
         ]
     }
