@@ -55,7 +55,7 @@ class GroupsController < ApplicationController
             :rules => @rules.map { |rule|
               {
                   :item_id => rule.item_id,
-                  :filter_reason_id => "/filter_reasons/#{rule.id}"
+                  :filter_reason_id => "/filter_reasons/#{rule.filter_reason.id}"
               }
             },
             :links => [
