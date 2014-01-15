@@ -1,8 +1,14 @@
 module DydraHelper
   def self.bind_value (bindings, key)
-    bindings.select { |binding|
+    binding = bindings.select { |binding|
       binding['p']['value'] == "http://edec.org/#{key}"
-    }.first['o']['value']
+    }.first
+
+    if binding
+      binding['o']['value']
+    else
+      nil
+    end
   end
 
   def bind_value (bindings, key)
@@ -10,7 +16,11 @@ module DydraHelper
   end
 
   def self.rid (resource, type)
-    resource.match("#{type}/(.*)").captures[0]
+    if resource
+      resource.match("#{type}/(.*)").captures[0]
+    else
+      nil
+    end
   end
 
   def rid(resource, type)

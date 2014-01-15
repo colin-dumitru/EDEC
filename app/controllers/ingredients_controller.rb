@@ -11,10 +11,17 @@ class IngredientsController < ApplicationController
 
     respond_to do |format|
       format.json do
-         render json: {
-             :name => bind_value(bindings, 'name'),
-             :company => "/companies/#{company}"
-         }
+        if company
+          render json: {
+              :name => bind_value(bindings, 'name'),
+              :company => "/companies/#{company}"
+          }
+        else
+          render json: {
+              :name => bind_value(bindings, 'name')
+          }
+        end
+
       end
     end
   end
