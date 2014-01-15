@@ -21,6 +21,7 @@ class Product
     bindings = $d.resource(id, 'product')
     company_id = DydraHelper.rid(DydraHelper.bind_value(bindings, 'madeBy'), 'company')
     name = DydraHelper.bind_value(bindings, 'name')
+    image = DydraHelper.bind_value(bindings, 'logo')
 
     ingredients_query = "PREFIX p:<http://edec.org/product/>
                       SELECT *
@@ -32,7 +33,7 @@ class Product
       DydraHelper.rid(binding['o']['value'], 'ingredient')
     }
 
-    Product.new(id, company_id, 'Irigna forgot to add an image', name, ingredients)
+    Product.new(id, company_id, image, name, ingredients)
   end
 
   def self.bind_value (bindings, key)
