@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
       format.json do
         render json: {
             :name => product.name,
-            :image => 'Irina forgot to add an image',
+            :image => product.image,
             :ingredients => product.ingredients.map { |id|
               {
                   :id => "/ingredients/#{id}",
