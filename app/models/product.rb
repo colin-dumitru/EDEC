@@ -1,7 +1,7 @@
 require 'dydra_impl'
 
 class Product
-  include DydraHelper
+  include SparqlHelper
 
   attr_accessor :id
   attr_accessor :company_id
@@ -19,9 +19,9 @@ class Product
 
   def self.find(id)
     bindings = $d.resource(id, 'product')
-    company_id = DydraHelper.rid(DydraHelper.bind_value(bindings, 'madeBy'), 'company')
-    name = DydraHelper.bind_value(bindings, 'name')
-    image = DydraHelper.bind_value(bindings, 'logo')
+    company_id = SparqlHelper.rid(SparqlHelper.bind_value(bindings, 'madeBy'), 'company')
+    name = SparqlHelper.bind_value(bindings, 'name')
+    image = SparqlHelper.bind_value(bindings, 'logo')
 
     ingredients_query = "PREFIX p:<http://edec.org/product/>
                       SELECT *
@@ -30,7 +30,7 @@ class Product
                       }"
 
     ingredients = $d.query(ingredients_query).map { |binding|
-      DydraHelper.rid(binding['o']['value'], 'ingredient')
+      SparqlHelper.rid(binding['o']['value'], 'ingredient')
     }
 
     Product.new(id, company_id, image, name, ingredients)

@@ -2,7 +2,7 @@ require 'dydra_impl'
 
 class ProductsController < ApplicationController
   include ApplicationHelper
-  include DydraHelper
+  include SparqlHelper
 
   before_action :check_authenticated, :only => [:verdict]
 

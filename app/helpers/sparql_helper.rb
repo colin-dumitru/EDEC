@@ -1,4 +1,4 @@
-module DydraHelper
+module SparqlHelper
   def self.bind_value (bindings, key)
     binding = bindings.select { |binding|
       binding['p']['value'] == "http://edec.org/#{key}"
@@ -12,7 +12,7 @@ module DydraHelper
   end
 
   def bind_value (bindings, key)
-    DydraHelper.bind_value(bindings, key)
+    SparqlHelper.bind_value(bindings, key)
   end
 
   def self.rid (resource, type)
@@ -24,6 +24,6 @@ module DydraHelper
   end
 
   def rid(resource, type)
-    DydraHelper.rid(resource, type)
+    SparqlHelper.rid(resource, type)
   end
 end

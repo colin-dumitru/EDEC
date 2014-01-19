@@ -2,7 +2,7 @@ require 'dydra_impl'
 require 'json'
 
 class IngredientsController < ApplicationController
-  include DydraHelper
+  include SparqlHelper
   include ApplicationHelper
 
   def show
