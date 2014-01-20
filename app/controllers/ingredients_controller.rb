@@ -7,7 +7,7 @@ class IngredientsController < ApplicationController
 
   def show
     bindings = $d.resource(params[:id], 'ingredient')
-    company = rid( bind_value(bindings, 'madeBy'), 'company')
+    company = rid( bind_value(bindings, 'Organization'), 'company')
 
     respond_to do |format|
       format.json do

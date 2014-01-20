@@ -1,7 +1,7 @@
 module SparqlHelper
   def self.bind_value (bindings, key)
     binding = bindings.select { |binding|
-      binding['p']['value'] == "http://edec.org/#{key}"
+      binding['p']['value'] == "http://schema.org/#{key}"
     }.first
 
     if binding

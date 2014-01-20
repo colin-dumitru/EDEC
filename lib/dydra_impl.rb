@@ -16,13 +16,13 @@ class DydraImpl
     query("PREFIX i:<http://edec.org/#{type}/>
           SELECT *
           WHERE {
-                   ?s <http://edec.org/name> ?o FILTER (regex(str(?s), 'edec.org/#{type}') && regex(str(?o), '#{name}', 'i'))
+                   ?s <http://schema.org/name> ?o FILTER (regex(str(?s), 'edec.org/#{type}') && regex(str(?o), '#{name}', 'i'))
           }"
     )
   end
 
   def query(query)
-    url = "http://edec-rdf.herokuapp.com/edec/sparql?query=#{URI.escape(query)}&output=json"
+    url = "http://edec-rdf.herokuapp.com/edec/sparql?query=#{CGI.escape(query)}&output=json"
     JSON.parse(
         Net::HTTP.get(URI.parse(url))
     )['results']['bindings']

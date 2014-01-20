@@ -57,11 +57,11 @@ class ProductsController < ApplicationController
 
             SELECT DISTINCT ?product
             WHERE {
-                     v:#{params[:id]} <http://edec.org/type> ?type;
-                           <http://edec.org/hasIngredient> ?ing.
-                     ?product  <http://edec.org/type> ?type;
-                                     <http://edec.org/hasIngredient> ?ingr.
-                      FILTER ( ?product != v:1 &&   (?ingr IN (?ing) )  )
+                     v:#{params[:id]} <http://schema.org/category> ?type;
+                           <http://schema.org/ingredients> ?ing.
+                     ?product  <http://schema.org/category> ?type;
+                                     <http://schema.org/ingredients> ?ingr.
+                      FILTER ( ?product != v:#{params[:id]} &&   (?ingr IN (?ing) )  )
             }
              HAVING ( ( count(?ing)>=3 && count(?ingr)>=2 ) || (count(?ing)<3 ) )"
 
@@ -94,7 +94,7 @@ class ProductsController < ApplicationController
     ingr_query = "PREFIX i:<http://edec.org/ingredient/>
                   SELECT DISTINCT *
                   WHERE {
-                    ?s <http://edec.org/madeBy> ?o FILTER (?s in (#{ingredients.map { |i| "i:#{i}" }.join(',')}))
+                    ?s <http://schema.org/Organization> ?o FILTER (?s in (#{ingredients.map { |i| "i:#{i}" }.join(',')}))
                   }"
 
     companies = (companies + $d.query(ingr_query).map { |binding|

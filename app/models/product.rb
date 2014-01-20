@@ -19,14 +19,14 @@ class Product
 
   def self.find(id)
     bindings = $d.resource(id, 'product')
-    company_id = SparqlHelper.rid(SparqlHelper.bind_value(bindings, 'madeBy'), 'company')
+    company_id = SparqlHelper.rid(SparqlHelper.bind_value(bindings, 'Organization'), 'company')
     name = SparqlHelper.bind_value(bindings, 'name')
-    image = SparqlHelper.bind_value(bindings, 'logo')
+    image = SparqlHelper.bind_value(bindings, 'image')
 
     ingredients_query = "PREFIX p:<http://edec.org/product/>
                       SELECT *
                       WHERE {
-                               p:#{id} <http://edec.org/hasIngredient> ?o
+                               p:#{id} <http://schema.org/ingredients> ?o
                       }"
 
     ingredients = $d.query(ingredients_query).map { |binding|

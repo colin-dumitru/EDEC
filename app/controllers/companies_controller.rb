@@ -13,7 +13,7 @@ class CompaniesController < ApplicationController
          render json: {
              :name => bind_value(bindings, 'name'),
              :description => bind_value(bindings, 'description'),
-             :logo => bind_value(bindings, 'logo')
+             :logo => bind_value(bindings, 'image')
          }
       end
     end
