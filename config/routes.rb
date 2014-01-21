@@ -12,6 +12,7 @@ EDEC::Application.routes.draw do
   get 'groups/:id/leave' => 'groups#leave'
   get 'groups/trending' => 'groups#trending'
   get 'groups/suggest/personal' => 'groups#personal_suggestions'
+  get 'groups/suggest/friends' => 'groups#friends_suggestion'
 
   get 'products/:id/similar' => 'products#similar'
   get 'products/:id/verdict' => 'products#verdict'

@@ -252,6 +252,15 @@ class GroupsController < ApplicationController
   end
 
   def friends_suggestion
+    uri = URI('https://www.googleapis.com/plus/v1/people/me')
+
+    request = Net::HTTP::Get.new(uri.request_uri)
+    request['Authorization'] = "Bearer #{@token}"
+    request["Accept"] = "*/*"
+
+    json = JSON.parse(
+        Net::HTTP.new(uri.host, uri.port).request( request )
+    )
 
   end
 end

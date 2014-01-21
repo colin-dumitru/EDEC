@@ -3,6 +3,5 @@ class User
 
   def initialize
     @id = nil
-    @name = nil
   end
 end
