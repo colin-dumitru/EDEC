@@ -14,11 +14,13 @@ class IngredientsController < ApplicationController
         if company
           render json: {
               :name => bind_value(bindings, 'name'),
+              :image => bind_value(bindings, 'image'),
               :company => "/companies/#{company}"
           }
         else
           render json: {
-              :name => bind_value(bindings, 'name')
+              :name => bind_value(bindings, 'name'),
+              :image => bind_value(bindings, 'image')
           }
         end
 
