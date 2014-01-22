@@ -270,6 +270,7 @@ class GroupsController < ApplicationController
     suggested = Member.where('user_id in (?) and group_id not in (?)', friend_ids, group_ids)
       .group('group_id')
       .count('id')
+      .map{ |x| x[0]}
       .to_a[0..5]
 
     respond_to do |format|
