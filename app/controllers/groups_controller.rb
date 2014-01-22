@@ -192,7 +192,7 @@ class GroupsController < ApplicationController
 
   def trending
     @group_ids = Member.
-        where('created_at > ?', 1.month.ago).
+        where('created_at > ?', 1.year.ago).
         group('group_id').
         count('id')
 
@@ -256,6 +256,7 @@ class GroupsController < ApplicationController
     friend_ids = Member.where('user_id <> ?', @user.id)
       .group('user_id')
       .count('id')
+      .map{ |x| x[0]}
       .to_a
 
     # Get all groups which were created by the user or which were joined by the user

@@ -24,8 +24,14 @@ class ApplicationController < ActionController::Base
       json = JSON.parse(
           Net::HTTP.get(URI.parse(url))
       )
-      @user.id = json['user_id']
-      @@token_cache[@token] = @user
+
+      if json['user_id']
+        @user.id = json['user_id']
+        @@token_cache[@token] = @user
+      else
+        return render(:json => json, :status => 401, :layout => false)
+      end
+
     end
   end
 end
