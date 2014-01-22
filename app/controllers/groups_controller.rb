@@ -124,12 +124,14 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new
 
+    json = JSON.parse(request.body.string)
+
     @group.owner = @user.id
-    @group.title = params[:title]
-    @group.logo = params[:logo]
-    @group.description = params[:description]
-    @group.rules = params[:rules].map { |rule|
-      Rule.create(item_id: rule[:item_id], filter_reason_id: rule[:filter_reason_id].match(/\/filter_reasons\/([0-9]+)/).captures[0])
+    @group.title = json ['title']
+    @group.logo = json ['logo']
+    @group.description = json ['description']
+    @group.rules = json ['rules'].map { |rule|
+      Rule.create(item_id: rule['item_id'], filter_reason_id: rule['filter_reason_id'].match(/\/filter_reasons\/([0-9]+)/).captures[0])
     }
 
     @group.save
