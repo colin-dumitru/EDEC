@@ -1,7 +1,7 @@
 class GroupsController < ApplicationController
   include ApplicationHelper
 
-  before_action :check_authenticated, :only => [:created, :joined, :join, :leave, :create, :update, :personal_suggestions]
+  before_action :check_authenticated, :only => [:created, :joined, :join, :leave, :create, :update, :personal_suggestions, :friends_suggestion]
 
   def created
     @groups = Group.all.where(owner: @user.id)
@@ -192,7 +192,7 @@ class GroupsController < ApplicationController
 
   def trending
     @group_ids = Member.
-        where('created_at > ?', 1.week.ago).
+        where('created_at > ?', 1.month.ago).
         group('group_id').
         count('id')
 
@@ -252,15 +252,37 @@ class GroupsController < ApplicationController
   end
 
   def friends_suggestion
-    uri = URI('https://www.googleapis.com/plus/v1/people/me')
+    # As the Google+ API is broken, I've chosen three random user ids as 'friends'
+    friend_ids = Member.where('user_id <> ?', @user.id)
+      .group('user_id')
+      .count('id')
+      .to_a
 
-    request = Net::HTTP::Get.new(uri.request_uri)
-    request['Authorization'] = "Bearer #{@token}"
-    request["Accept"] = "*/*"
+    # Get all groups which were created by the user or which were joined by the user
+    group_ids = (Group.all.where(owner: @user.id) + Member.where(:user_id => @user.id).map { |member| member.group }).
+        map { |group| group.id }.
+        uniq { |id| id }
 
-    json = JSON.parse(
-        Net::HTTP.new(uri.host, uri.port).request( request )
-    )
+    # Get all the groups which the user is not a part of, but his friends are
+    suggested = Member.where('user_id in (?) and group_id not in (?)', friend_ids, group_ids)
+      .group('group_id')
+      .count('id')
+      .to_a[0..5]
+
+    respond_to do |format|
+      format.json do
+        render json: suggested.map{|id|
+          {
+              :id => "/groups/#{id}",
+              :links => [
+                  link('group_info', 'GET', "/groups/#{id}.json"),
+                  link('join_info', 'GET', "/groups/#{id}/join.json")
+              ]
+          }
+        }
+      end
+    end
+
 
   end
 end
