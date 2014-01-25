@@ -55,7 +55,7 @@ class ProductsController < ApplicationController
   def similar
     query = "PREFIX v:<http://edec.org/product/>
 
-            SELECT SAMPLE(DISTINCT ?product)
+            SELECT GROUP_CONCAT(DISTINCT ?product)
             WHERE {
                      v:#{params[:id]} <http://schema.org/category> ?type;
                            <http://schema.org/ingredients> ?ing.
@@ -73,8 +73,9 @@ class ProductsController < ApplicationController
       format.json do
         render json: bindings
         .select {|binding| binding.has_key?('.1')}
-        .map { |binding|
-          id = rid(binding['.1']['value'], 'product')
+        .map {|binding| binding['.1']['value'].split(' ')}
+        .flatten!
+        .map { |id|
           {
               :id => id,
               :links => [
