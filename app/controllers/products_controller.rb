@@ -74,7 +74,7 @@ class ProductsController < ApplicationController
         render json: bindings
         .select {|binding| binding.has_key?('.1')}
         .map {|binding| binding['.1']['value'].split(' ')}
-        .flatten!
+        .flatten
         .map {|id| "/products/#{rid(id, 'product')}"}
         .map { |id|
           {
