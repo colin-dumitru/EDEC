@@ -75,11 +75,12 @@ class ProductsController < ApplicationController
         .select {|binding| binding.has_key?('.1')}
         .map {|binding| binding['.1']['value'].split(' ')}
         .flatten!
+        .map {|id| "/products/#{rid(id, 'product')}"}
         .map { |id|
           {
-              :id => "/products/#{rid(id, 'product')}",
+              :id => id,
               :links => [
-                  link('product_info', 'GET', "/products/#{id}.json")
+                  link('product_info', 'GET', "#{id}.json")
               ]
           }
         }
