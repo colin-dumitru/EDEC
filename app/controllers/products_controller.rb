@@ -77,7 +77,7 @@ class ProductsController < ApplicationController
         .flatten!
         .map { |id|
           {
-              :id => id,
+              :id => "/products/#{rid(id, 'product')}",
               :links => [
                   link('product_info', 'GET', "/products/#{id}.json")
               ]
