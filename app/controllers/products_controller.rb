@@ -55,7 +55,7 @@ class ProductsController < ApplicationController
   def similar
     query = "PREFIX v:<http://edec.org/product/>
 
-            SELECT DISTINCT ?product
+            SELECT SAMPLE(DISTINCT ?product)
             WHERE {
                      v:#{params[:id]} <http://schema.org/category> ?type;
                            <http://schema.org/ingredients> ?ing.
@@ -65,13 +65,15 @@ class ProductsController < ApplicationController
             }
              HAVING ( ( count(?ing)>=3 && count(?ingr)>=2 ) || (count(?ing)<3 ) )"
 
+
+
     bindings = $d.query(query)
 
     respond_to do |format|
       format.json do
         render json: bindings.map { |binding|
-          id = rid(binding['product']['value'], 'product')
-
+          id = rid(binding['.1']['value'], 'product')
+          print id
           {
               :id => id,
               :links => [
