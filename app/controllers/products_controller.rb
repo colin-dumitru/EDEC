@@ -71,9 +71,10 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       format.json do
-        render json: bindings.map { |binding|
+        render json: bindings
+        .select {|binding| binding.has_key?('.1')}
+        .map { |binding|
           id = rid(binding['.1']['value'], 'product')
-          print id
           {
               :id => id,
               :links => [

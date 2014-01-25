@@ -66,7 +66,7 @@
   <component name="GradleSettings">
     <option name="gradleHome" value="C:/Program Files (x86)/Gradle/gradle-1.0-rc-3" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="RVM: ruby-2.0.0-p247 [global]" project-jdk-type="RUBY_SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="RVM: ruby-2.0.0-p247" project-jdk-type="RUBY_SDK" />
   <component name="masterDetails">
     <states>
       <state key="ProjectJDKs.UI">
