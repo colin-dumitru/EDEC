@@ -1,49 +1,8 @@
-
 ## Authorization ##
 
-Retrieves information regarding the currently logged in user, such as name and avatar.
+All requests which need server side authorization for the user (group management, suggestions etc.) MUST include the "Authorization" head with the Google Plus authentication token. Otherwise a 401 HTTP error code is returned, alongside a JSON response with a single field 'error' which contains the error message:
 
-**Request**:  `GET /user.json`
-
-**Response**
-
-    {
-        'name': '<User Name>',
-        'avatar' : '<base 64 encoded image>',
-        'links' : [
-            {
-                'rel' : 'scan_product|personal_groups|joined_groups',
-                'method' : 'GET|POST|DELETE|PUT',
-                'url' : '<action url>'
-            }
-            ...
-        ]
-    }
-
-**Example**
-
-    > GET /user.json
-    {
-        'name': 'Mark',
-        'avatar' : 'iVBORw0KGgoAAA==',
-        'links' : [
-            {
-                'rel' : 'scan_product',
-                'method' : 'GET',
-                'url' : '/products.json'
-            },
-            {
-                'rel' : 'personal_groups',
-                'method' : 'GET',
-                'url' : '/groups/created.json'
-            },
-            {
-                'rel' : 'joined_groups',
-                'method' : 'GET',
-                'url' : '/groups/joined.json'
-            }
-        ]
-    }
+'Authorization' => 'ya29.1.AADtN_WKfJMEKntMj4_Trggaf-ngs7CTkfwuBXAprdFGpvXQi2Ea7tCfwrasUPLe0w-y6AuODp-MyXEyYvcTPZU-8FZbNrSD3UXYQBfmLun7dIon0txvCukESf6EUg1vVSi5_88ysAn1'
     
 
 ## Bar Code Scanning and Products ##
