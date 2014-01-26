@@ -2,7 +2,7 @@
 
 All requests which need server side authorization for the user (group management, suggestions etc.) MUST include the "Authorization" head with the Google Plus authentication token. Otherwise a 401 HTTP error code is returned, alongside a JSON response with a single field 'error' which contains the error message:
 
-'Authorization' => 'ya29.1.AADtN_WKfJMEKntMj4_Trggaf-ngs7CTkfwuBXAprdFGpvXQi2Ea7tCfwrasUPLe0w-y6AuODp-MyXEyYvcTPZU-8FZbNrSD3UXYQBfmLun7dIon0txvCukESf6EUg1vVSi5_88ysAn1'
+    'Authorization' => 'ya29.1.AADtN_WKfJMEKntMj4_Trggaf-ngs7CTkfwuBXAprdFGpvXQi2Ea7tCfwrasUPLe0w-y6AuODp-MyXEyYvcTPZU-8FZbNrSD3UXYQBfmLun7dIon0txvCukESf6EUg1vVSi5_88ysAn1'
     
 
 ## Bar Code Scanning and Products ##
